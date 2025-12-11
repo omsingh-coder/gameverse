@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Play — PalakFlow</title>
+<link rel="stylesheet" href="style.css"/>
+<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<div class="page">
+  <div class="card">
+    <div id="gameHeader"></div>
+    <div id="boardWrap"></div>
+    <div id="gameLog" class="card small"></div>
+  </div>
+</div>
+
+<script src="game-chess.js"></script>
+<script src="game-ludo.js"></script>
+<script src="game-ttt.js"></script>
+<script src="client.js"></script>
+<script>
+/* client.js will detect game param and initialize appropriate module */
+</script>
+</body>
+</html>
