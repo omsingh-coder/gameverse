@@ -1,0 +1,45 @@
+/* neon romantic gaming theme; mobile-first */
+:root{
+  --bg0:#0b1020;
+  --bg1:#161a2f;
+  --neon1:#ff6fb5;
+  --neon2:#6ea4ff;
+  --neon3:#b76bff;
+  --glass: rgba(255,255,255,0.04);
+  --round:14px;
+  --accent:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));
+  font-family: "Segoe Script", "Dancing Script", cursive, system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 10%, rgba(183,107,255,0.08), transparent), linear-gradient(180deg,var(--bg0),var(--bg1));color:#e9eefb;padding:16px;display:flex;align-items:flex-start;justify-content:center;}
+.page{width:100%;max-width:900px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:var(--round);padding:16px;margin:8px;box-shadow:0 8px 40px rgba(3,6,20,0.7);backdrop-filter: blur(6px);}
+.hero{text-align:center;padding:24px}
+.logo{font-size:28px;color:var(--neon1);text-shadow:0 6px 30px rgba(111,0,85,0.2)}
+.logo .egg{opacity:0.6;color:transparent;background:linear-gradient(90deg,var(--neon1),var(--neon2));-webkit-background-clip:text}
+.sub{color:rgba(255,255,255,0.7)}
+.row{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:12px;flex-wrap:wrap}
+input, textarea, select{width:100%;padding:12px;border-radius:12px;border:none;background:var(--glass);color:inherit;font-size:15px}
+.btn{padding:10px 14px;border-radius:12px;border:none;background:var(--neon1);color:#071126;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(111,0,85,0.12);transition: transform .12s}
+.btn:hover{transform:translateY(-3px)}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.04)}
+.hint{color:rgba(255,255,255,0.6);font-size:13px;margin-top:8px}
+.small{padding:10px}
+.players .pill{display:inline-block;padding:8px 10px;margin:6px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:999px}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+prewrap{display:block}
+
+/* pre-game animated cards */
+.prewrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;gap:12px;pointer-events:none}
+.precard{width:140px;height:80px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;transform:rotateX(90deg);animation:flipIn .6s forwards}
+@keyframes flipIn{to{transform:rotateX(0deg)}}
+
+/* board basics */
+#boardWrap{display:flex;justify-content:center;align-items:center;margin-top:12px}
+#gameLog{margin-top:12px;font-size:14px;color:rgba(255,255,255,0.75)}
+
+/* responsive */
+@media(min-width:900px){
+  .row{justify-content:flex-start}
+  .card{padding:20px}
+}
