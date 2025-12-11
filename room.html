@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Room — PalakFlow</title>
+<link rel="stylesheet" href="style.css"/>
+<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<div class="page">
+  <div class="card">
+    <div class="top">
+      <h2>Room: <span id="roomCode"></span></h2>
+      <div class="small">Invite code (share it)</div>
+    </div>
+
+    <div class="players card small" id="playersList"></div>
+
+    <div class="controls card small">
+      <label>Choose game</label>
+      <select id="gameSelect">
+        <option value="chess">Chess</option>
+        <option value="ludo">Ludo</option>
+        <option value="ttt">Tic Tac Toe</option>
+      </select>
+      <button id="selectGameBtn" class="btn">Select Game</button>
+    </div>
+
+    <div class="secret card small">
+      <label>Submit your secret (winner sees it)</label>
+      <textarea id="secretInput" placeholder="Type something only winner should see"></textarea>
+      <button id="submitSecretBtn" class="btn">Submit Secret</button>
+    </div>
+
+    <div class="start card small hidden" id="startCard">
+      <h3>Ready players</h3>
+      <div id="startPlayers"></div>
+      <button id="startBtn" class="btn">Start Game (show animation)</button>
+    </div>
+  </div>
+</div>
+
+<script src="client.js"></script>
+<script>
+/* small inline to wire room UI */
+const socket = io();
+const url = new URL(location);
+const roomCode = url.searchParams.get('room');
+const myName = url.searchParams.get('name') || 'Guest';
+document.getElementById('roomCode').textContent = roomCode;
+socket.emit('join_room', { code: roomCode, name: myName }, res => {
+  if(res?.error) alert(res.error);
+});
+const playersList = document.getElementById('playersList');
+const startCard = document.getElementById('startCard');
+const startPlayers = document.getElementById('startPlayers');
+
+socket.on('room_update', info => {
+  playersList.innerHTML = '';
+  info.players.forEach(p=>{
+    const d = document.createElement('div'); d.textContent = p.name; playersList.appendChild(d);
+  });
+  // show start block if >1
+  if(info.players.length > 0){
+    startCard.classList.remove('hidden');
+    startPlayers.innerHTML='';
+    info.players.forEach(p=> {
+      const el = document.createElement('div'); el.className='pill'; el.textContent = p.name; startPlayers.appendChild(el);
+    });
+  }
+});
+
+document.getElementById('selectGameBtn').addEventListener('click', ()=>{
+  const g = document.getElementById('gameSelect').value;
+  socket.emit('set_game', { code: roomCode, game: g }, (res)=>{});
+  alert('Selected ' + g + '. Click Start to animate then begin.');
+});
+
+document.getElementById('submitSecretBtn').addEventListener('click', ()=>{
+  const s = document.getElementById('secretInput').value;
+  socket.emit('submit_secret', { code: roomCode, secret: s }, res => {
+    if(res.ok) alert('Secret saved (encrypted).');
+  });
+});
+
+document.getElementById('startBtn').addEventListener('click', ()=>{
+  socket.emit('start_game', { code: roomCode }, res=>{});
+});
+
+// when pre_game arrives, show animated cards then redirect to game page
+socket.on('pre_game', ({ players, game })=>{
+  // simple flip animation using CSS classes
+  const cardWrap = document.createElement('div'); cardWrap.className='prewrap';
+  players.forEach(name=>{
+    const c = document.createElement('div'); c.className='precard'; c.textContent = name;
+    cardWrap.appendChild(c);
+  });
+  document.body.appendChild(cardWrap);
+  setTimeout(()=> {
+    cardWrap.classList.add('played');
+  }, 300);
+  setTimeout(()=> {
+    location.href = `game.html?room=${roomCode}&name=${encodeURIComponent(myName)}&game=${game}`;
+  }, 2000 + players.length * 400);
+});
+</script>
+</body>
+</html>
