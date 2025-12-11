@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PlayWithPalak — Game Hub</title>
+  <!-- Cursive / cool font -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app" class="app-root">
+    <!-- Header with a hidden/obfuscated crush name included as data attribute -->
+    <header class="topbar">
+      <h1 class="brand">PlayWith<span class="crush-deco" data-crush="PALAK PANDEY">✧✦✧</span></h1>
+      <!-- The actual visible text is decorative; the real name is stored in data-crush for JS to use privately -->
+    </header>
+
+    <!-- Game selector (main page) -->
+    <section id="selector" class="page selector-page">
+      <h2 class="section-title">Choose a Game</h2>
+      <div class="games-grid">
+        <button class="game-card" data-game="tic-tac-toe">Tic Tac Toe</button>
+        <button class="game-card" data-game="memory-duel">Memory Duel</button>
+        <button class="game-card" data-game="mini-ludo">Mini Ludo</button>
+      </div>
+      <p class="hint">Mobile friendly • Play with a friend using room codes</p>
+    </section>
+
+    <!-- Room create / join page (shared for all games) -->
+    <section id="room" class="page hidden room-page">
+      <h2 class="section-title">Room — <span id="selected-game">Game</span></h2>
+      <form id="room-form" class="room-form">
+        <label>
+          Your name
+          <input type="text" id="player-name" placeholder="Enter your name" required />
+        </label>
+
+        <label>
+          Secret (only winner sees)
+          <input type="text" id="player-secret" placeholder="Write a secret..." />
+        </label>
+
+        <div class="row">
+          <button type="button" id="create-room">Create Room</button>
+          <input type="text" id="join-code" placeholder="Or paste room code" />
+          <button type="button" id="join-room">Join Room</button>
+        </div>
+      </form>
+
+      <div id="room-area" class="hidden">
+        <div id="room-code-display">Room: <span id="room-code"></span></div>
+        <div id="players-list" class="players-list">
+          <!-- Player cards will animate in here -->
+        </div>
+        <button id="start-game" class="start-game disabled">Start Game</button>
+      </div>
+
+      <button id="back-to-selector" class="back">Back</button>
+    </section>
+
+    <!-- Game canvas area where the selected game's UI will mount -->
+    <section id="game-canvas" class="page hidden game-canvas">
+      <h2 id="game-title"></h2>
+      <div id="game-area"></div>
+      <button id="leave-game" class="back">Leave</button>
+    </section>
+
+    <footer class="footer-note">Made with ❤️ — single-folder project</footer>
+  </main>
+
+  <!-- App script (keeps project single-folder: styles.css and app.js live in same folder) -->
+  <script src="app.js"></script>
+</body>
+</html>
