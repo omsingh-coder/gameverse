@@ -1,0 +1,199 @@
+/* Root styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  font-family: 'Inter', sans-serif;
+  background: #0f0f0f;
+  color: #fff;
+  height: 100%;
+}
+
+.app-root {
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Brand with hidden crush name */
+.brand {
+  font-family: 'Pacifico', cursive;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ff9efc;
+}
+.crush-deco {
+  opacity: 0.7;
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* Page transitions */
+.page {
+  display: block;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Game selector */
+.section-title {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  font-family: 'Pacifico', cursive;
+  color: #ffdcfe;
+}
+
+.games-grid {
+  display: grid;
+  gap: 15px;
+}
+
+.game-card {
+  padding: 15px;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #ff4ec7, #7436ff);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff4ec755;
+}
+
+.hint {
+  text-align: center;
+  opacity: 0.8;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Room Page */
+.room-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.room-form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #222;
+  color: #fff;
+}
+
+.room-form button {
+  background: #ff3cc7;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+#room-area {
+  margin-top: 20px;
+}
+
+#room-code-display {
+  background: #1a1a1a;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.player-card {
+  background: #242424;
+  padding: 12px;
+  border-radius: 12px;
+  animation: fadeIn 0.5s ease;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#start-game {
+  width: 100%;
+  margin-top: 15px;
+  background: #5a2dff;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.back {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Game canvas */
+#game-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.8rem;
+  color: #ffe0fd;
+}
+
+#game-area {
+  padding: 20px;
+  background: #1c1c1c;
+  border-radius: 15px;
+  min-height: 200px;
+}
+
+.footer-note {
+  margin-top: 25px;
+  text-align: center;
+  opacity: 0.6;
+  font-size: 0.8rem;
+}
