@@ -1,0 +1,16 @@
+{
+  "name": "palakflow-gamehub",
+  "version": "1.0.0",
+  "description": "Multiplayer Chess / Ludo / TicTacToe with secrets (PalakFlow themed)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "you",
+  "license": "MIT",
+  "dependencies": {
+    "chess.js": "^1.1.1",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  }
+}
